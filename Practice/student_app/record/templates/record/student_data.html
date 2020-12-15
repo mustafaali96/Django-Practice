@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Student Record App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:#FFFFFF;">
+<nav class="navbar navbar-light" style="background-color:#99ccff;">
+    <a href="#" class="navbar-brand" style="color:#000000">Student App</a>
+    <a href="{% url 'upload-record' %}" class="navbar-link btn-lg" style="color:#000000;">Upload Student Data</a>
+</nav>
+<br>
+{% block content %}
+<div class="card-columns">
+    {% for record in shelf %}
+    <div class="card" style="width: 15rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ record.name }}</h5>
+    <p class="card-text">{{ record.student_email }}</p>
+   <div class="card-footer bg-transparent border-dark">
+   <p class="card-title">{{record.student_number}}</p>
+   <center>
+       <a href="update/{{record.id}}" class="btn btn-warning" id = '{{record.id}}'>edit</a>
+       <a href="delete/{{record.id}}" class="btn btn-danger" id = '{{record.id}}'>delete</a>
+    </center>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>
