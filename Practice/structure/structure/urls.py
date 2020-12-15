@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from structure_app.views import new_structure_list
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', admin.site.urls),
+    path('list/', new_structure_list)
 ]
