@@ -13,12 +13,14 @@ def upload(request):
     upload = BookCreate()
     if request.method == 'POST':
         upload = BookCreate(request.POST, request.FILES)
+#        print(request.POST) if we want to print request on console
         if upload.is_valid():
             upload.save()
             return redirect('index')
         else:
             return HttpResponse("""your form is wrong, reload on <a href = "{{ url : 'index'}}">reload</a>""")
     else:
+#        print(upload) print html page content on console
         return render(request, 'book/upload_form.html', {'upload_form':upload})
 
 def update_book(request, book_id):
