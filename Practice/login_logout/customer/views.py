@@ -20,10 +20,16 @@ def login_view(request):
 
 def signup_view(request):
     if request.method == 'POST':
+        count = User.objects.count()
+        cust_count = customer_model.objects.count()
+        cust_rec = customer_model.objects.all()
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'customer/index.html')
+            return render(request, 'customer/index.html', {
+        'count': count, 'cust_count': cust_count, 
+        'cust_rec': cust_rec
+    })
     else:
         form = UserCreationForm()
     return render(request, 'customer/signup.html', {
@@ -41,6 +47,10 @@ def home_view(request):
 
 @login_required
 def cust_view(request):
-    cust_view_list = customer_model.objects.all()
-    context = {'cust_view_list': cust_view_list}
-    return render(request, "customer/index.html", context)
+    count = User.objects.count()
+    cust_count = customer_model.objects.count()
+    cust_rec = customer_model.objects.all()
+    return render(request, "customer/index.html", {
+        'count': count, 'cust_count': cust_count, 
+        'cust_rec': cust_rec
+    })

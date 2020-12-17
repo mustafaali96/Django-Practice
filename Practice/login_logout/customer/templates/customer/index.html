@@ -6,8 +6,24 @@
   
 <body>
     <h2>Homepage</h2>
-  <p>Welcome to My Site, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
-
+  <p>Welcome! This is your timeline, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
+  {% block content %}
+  {{ contex }}
+  <p>
+    <strong>Total users registered: </strong> {{ count }}
+  </p>
+  <p>
+    <strong>Total Number of Customers: </strong> {{ cust_count }}
+  </p>
+  <p>
+    <strong>List of Customers: </strong>
+  </p>
+  {% for x in cust_rec %}
+  <p>
+    <strong>{{ x.cust_name }}, {{ x.cust_details }}</strong> 
+  </p>
+  {% endfor %}
+{% endblock %}
 
 </body>
 
