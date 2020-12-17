@@ -4,6 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import customer_model
 from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
+from django.http.response import HttpResponseRedirect
+from django.urls.base import reverse
 # Create your views here.
 
 
@@ -13,7 +16,7 @@ def login_view(request):
         return render(request, 'customer/index.html')
 
     else:
-        return render(request, 'customer/login.html')
+        return render(request, '/login/')
 
     
 
@@ -26,13 +29,10 @@ def signup_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'customer/index.html', {
-        'count': count, 'cust_count': cust_count, 
-        'cust_rec': cust_rec
-    })
+            return HttpResponseRedirect(reverse("login"))
     else:
         form = UserCreationForm()
-    return render(request, 'customer/signup.html', {
+    return render(request, 'registration/signup.html', {
         'form': form
     })
 

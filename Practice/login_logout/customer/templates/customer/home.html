@@ -23,7 +23,21 @@
     <strong>{{ x.cust_name }}, {{ x.cust_details }}</strong> 
   </p>
   {% endfor %}
-{% endblock %}
+  {% if user.is_authenticated %}
+  <a href="/login/">
+    <button>Log Out</button>
+</a>
+{% else %}
+<a href="/login/">
+  <button>Log in</button>
+</a>
+<a href="/signup/">
+<button>Sign Up</button>
+</a>
+{% endif %}
+  {% endblock %}
+
+
 </body>
 
 </html>
