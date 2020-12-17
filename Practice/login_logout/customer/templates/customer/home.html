@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Practice</title>
+</head>
+
+<body>
+{% block content %}
+  <h2>Homepage</h2>
+  <p>Welcome to My Site, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
+  {{ contex }}
+  <p>
+    <strong>Total users registered: </strong> {{ count }}
+  </p>
+  <p>
+    <strong>Total Number of Customers: </strong> {{ cust_count }}
+  </p>
+  <p>
+    <strong>List of Customers: </strong>
+  </p>
+  {% for x in cust_rec %}
+  <p>
+    <strong>{{ x.cust_name }}, {{ x.cust_details }}</strong> 
+  </p>
+  {% endfor %}
+{% endblock %}
+</body>
+
+</html>
