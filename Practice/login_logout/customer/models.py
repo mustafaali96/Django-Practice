@@ -1,10 +1,11 @@
 from django.db import models
+from django.http import request
 
 # Create your models here.
 class customer_model(models.Model):
     cust_id = models.CharField(max_length = 40)
     cust_name = models.CharField(max_length = 30)
-    cust_details = models.TextField(max_length = 40)
+    cust_details = models.TextField(max_length = 40, default='', blank=True)
     def __str__(self):
         return self.cust_id
 
