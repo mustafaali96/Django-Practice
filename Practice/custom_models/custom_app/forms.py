@@ -1,10 +1,12 @@
 from django import forms
+from django.forms import PasswordInput
 from custom_app.models import User
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
         widgets = {
-        'password1': forms.PasswordInput(),
-        'password2': forms.PasswordInput(),
+        'password': forms.PasswordInput(),
     }
-        fields = ("username", "password1", "password2","subject", "role", )
+        fields = ("username", "password","subject", "role", )
+    def save(self):
+        return User.objects.create_user(**self.cleaned_data)
