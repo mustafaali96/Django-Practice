@@ -21,15 +21,18 @@ def upload(request):
         return render(request,'record/upload_form.html', {'upload_form':upload})
     
 def update_record(request, record_id):
-    record_id = int(record_id)
+
+    print(record_id)
     try:
         record_sel = Record.objects.get(id = record_id)
     except Record.DoesNotExist:
         return redirect('index')
-    record_form = recordCreate(request.POST or None, instance = record_sel)
-    if record_form.is_valid():
-        record_form.save()
-        return redirect('index')
-    return render(request, 'record/upload_form.html', {'upload_form':record_form})
+    if request.method == 'POST':
+        record_form = recordCreate(request.POST or None, instance = record_sel)
+        if record_form.is_valid():
+            record_form.save()
+            return redirect('index')
+    else:
+        return render(request, 'record/upload_form.html', {'upload_form':record_form})
         
     

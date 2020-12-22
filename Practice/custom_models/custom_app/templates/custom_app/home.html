@@ -6,11 +6,20 @@
   
 <body>
     <h2>Homepage</h2>
-  <p>Welcome! This is Homepage, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
+    <p>Welcome! This is Homepage, {{ user.username }}!</p>
 
+    <h2> Hello {{request.user.role}} </h2>
+    {% if request.user.role == 'Teacher' %}
+        <h2> Teacher Dashboard {{user.id}}</h2>
+    {% else %}
+        <h1> Student Dashboard </h1>
+    {% endif %}
+{% comment %} <a href="update/{{record.id}}" class="btn btn-warning" id = '{{record.id}}'>edit</a> {% endcomment %}
+<a href= "{% url 'update' %}" class="btn" user_id = '{{user.id}}'</a>
+<button>Update</button>
 
-<a href= "{% url 'logout' %}"
-  <button>Log Out</button>
+<a href= "{% url 'logout' %}" class="btn"</a>
+    <button>Log Out</button>
 </a>
 
 </body>

@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.http import HttpResponse
-from django.urls import reverse
-from custom_app.forms import UserForm
+from django.urls import reverse, reverse_lazy
+from custom_app.forms import UserForm, recordCreate
 from django.contrib.auth.hashers import make_password
+from .models import User
 
 # Create your views here.
 
@@ -32,8 +33,26 @@ def login_view(request):
 
 @login_required
 def home_view(request):
-    user_name = request.user.username
-    role = request.user.email
-    print("user role is:", role)
-
+    # context = User.objects.values('role').distinct()
+    # print(context)
+    # user_name = request.user.username
+    # role = request.user.role
+    # subject = request.user.subject
+    # print("user role is:", role)
+    # print("Subjects are: ", subject)
+    # print("User id is: ", request.user.id)
     return render(request, 'custom_app/home.html')
+
+@login_required
+def update_record(request):
+    userInstance = User.objects.get(id=request.user.id)
+    if request.method == 'POST':
+        record_form = recordCreate(instance=userInstance, data=request.POST)
+        if record_form.is_valid():
+            record_form.save()
+            return redirect('index')
+        print(record_form.errors.as_json())
+        return render(request, 'custom_app/update.html', {'upload_form':record_form})
+        
+    record_form = recordCreate(instance=userInstance)
+    return render(request, 'custom_app/update.html', {'upload_form':record_form})

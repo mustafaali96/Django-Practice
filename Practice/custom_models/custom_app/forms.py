@@ -10,3 +10,8 @@ class UserForm(forms.ModelForm):
         fields = ("username", "password","subject", "role", )
     def save(self):
         return User.objects.create_user(**self.cleaned_data)
+
+class recordCreate(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("username","subject", "role", )
