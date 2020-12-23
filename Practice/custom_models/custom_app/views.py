@@ -13,9 +13,6 @@ from django.conf import settings
 def index_view(request):
     return render(request, 'custom_app/index.html')
 
-def index_page(request):
-    return render(request, 'custom_app/index_page.html')
-
 def signup_view(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -45,7 +42,7 @@ def home_view(request):
     # print("user role is:", role)
     # print("Subjects are: ", subject)
     # print("User id is: ", request.user.id)
-    return render(request, 'custom_app/home.html')
+    return render(request, 'custom_app/profile.html')
 
 @login_required
 def update_record(request):
