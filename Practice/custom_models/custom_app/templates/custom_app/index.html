@@ -8,15 +8,22 @@
     <h2>Homepage</h2>
   <p>Welcome! This is your timeline, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
 {% if user.is_authenticated %}
+
+<a href= "{% url 'home' %}" class="btn"</a>
+  <button>Home</button></a>
+
+<a href= "{% url 'update' %}" class="btn" user_id = '{{user.id}}'</a>
+<button>Update</button></a>
+
 <a href= "{% url 'logout' %}" class="btn"</a>
-  <button>Log Out</button>
-</a>
+  <button>Log Out</button></a>
+
 {% else %}
 <a href= "{% url 'login' %}" class="btn"</a>
-  <button>Login</button>
+  <button>Login</button></a>
 
 <a href= "{% url 'signup' %}" class="btn"</a>
-  <button>Sign up</button>
+  <button>Sign up</button></a>
 
 {% endif %}
 

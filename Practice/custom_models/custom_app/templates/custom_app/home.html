@@ -14,9 +14,12 @@
     {% else %}
         <h1> Student Dashboard </h1>
     {% endif %}
+
+<a href= "{% url 'index' %}" class="btn"</a>
+  <button>Index</button></a>
 {% comment %} <a href="update/{{record.id}}" class="btn btn-warning" id = '{{record.id}}'>edit</a> {% endcomment %}
 <a href= "{% url 'update' %}" class="btn" user_id = '{{user.id}}'</a>
-<button>Update</button>
+<button>Update</button></a>
 
 <a href= "{% url 'logout' %}" class="btn"</a>
     <button>Log Out</button>
