@@ -6,11 +6,15 @@ from django.urls import reverse, reverse_lazy
 from custom_app.forms import UserForm, recordCreate
 from django.contrib.auth.hashers import make_password
 from .models import User
+from django.conf import settings
 
 # Create your views here.
 
 def index_view(request):
     return render(request, 'custom_app/index.html')
+
+def index_page(request):
+    return render(request, 'custom_app/index_page.html')
 
 def signup_view(request):
     if request.method == 'POST':
@@ -31,7 +35,7 @@ def login_view(request):
     else:
         return render(request, 'registration/login.html')
 
-@login_required
+@login_required(login_url=reverse_lazy("login"),)
 def home_view(request):
     # context = User.objects.values('role').distinct()
     # print(context)
