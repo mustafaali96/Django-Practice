@@ -71,6 +71,13 @@ color: black;
 border:0 !important;
 }
 
+.input-group-prepend select{
+width: 220px;
+background-color: white;
+color: black;
+border:0 !important;
+}
+
 input:focus{
 outline: 0 0 0 0  !important;
 box-shadow: 0 0 0 0 !important;
@@ -112,7 +119,6 @@ margin-left: 4px;
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
-        
 			<div class="card-header">
 				<h3>Sign Up</h3>
 				<div class="d-flex justify-content-end social_icon">
@@ -124,46 +130,37 @@ margin-left: 4px;
 			<div class="card-body">
 				<form method="post" autocomplete="off">
                 {% csrf_token %}
-          
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-            {{ upload_form.username }}
-						
+				<div class="input-group form-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-user"></i></span>
+            			{{ upload_form.username }}	
 					</div>
-		
-          <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-chalkboard-teacher"></i></i></span>
-                <select name="role" id={{upload_form.role}}
-              </select>
-						</div>
+				</div>
+          		<div class="input-group form-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-chalkboard-teacher"></i></i></span>
+						<select name="role" id={{upload_form.role}}
+						</select>
 					</div>
-          
-          <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-book"></i></span>
-                <select name="subject" id={{upload_form.subject}}
-                  <option value="Maths">Maths</option>
-                  <option value="Science">Science</option>
-                  <option value="Programming">Programming</option>
-                </select>
-                
-            </div>
-            
-					</div>
-					<div class="form-group">
-						<input type="submit" value="update" class="btn float-right login_btn">
-					</div>
+				</div>
+          		<div class="input-group form-group">
+					<div class="input-group-prepend">
+					<span class="input-group-text"><i class="fas fa-book"></i></span>
+                	<select name="subject" id={{upload_form.subject}}
+                	</select>
+            		</div>
+				</div>
+				<div class="form-group">
+				<input type="submit" value="update" class="btn float-right login_btn">
+				</div>
 				</form>
 			</div>
-                <div class="card-footer">
+            <div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					<a href="{% url 'home' %}">Profile</a>
+				<a href="{% url 'home' %}">Profile</a>
 				</div>
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>

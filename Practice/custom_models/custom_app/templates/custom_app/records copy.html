@@ -1,0 +1,143 @@
+{% comment %} {% block content %}
+    <center>
+    {% if request.user.role == 'Teacher' %}
+    <h1 class="display-3" >Students Records</h1>
+
+    {% elif request.user.role == 'Student' %}
+    <h1 class="display-3" >Teachers List</h1>
+
+    {% else %}
+    <h1 class="display-3" >All Records</h1>
+
+    {% endif %}
+    <form method='POST'>
+        <table class = 'w-50 table table-light' ">
+            {% for field in record %}
+            <tr>
+                <th>{{field.username}}</th>
+                <td>{{ field.role }}</td>
+                <td>{{ field.subject }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    <a href= "{% url 'home' %}" class="btn"</a>
+  <button>Back</button></a>
+</center>
+{% endblock %} {% endcomment %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Practice</title>
+</head>
+<style>
+body {
+  font-family: "lato", sans-serif;
+}
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+}
+h2 small {
+  font-size: 0.5em;
+}
+
+.responsive-table li {
+  border-radius: 3px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.responsive-table .table-header {
+  background-color: #95A5A6;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.responsive-table .table-row {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+.responsive-table .col-1 {
+  flex-basis: 10%;
+}
+.responsive-table .col-2 {
+  flex-basis: 40%;
+}
+.responsive-table .col-3 {
+  flex-basis: 25%;
+}
+.responsive-table .col-4 {
+  flex-basis: 25%;
+}
+@media all and (max-width: 767px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+  .responsive-table li {
+    display: block;
+  }
+  .responsive-table .col {
+    flex-basis: 100%;
+  }
+  .responsive-table .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  .responsive-table .col:before {
+    color: #6C7A89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+}
+</style>
+<body>
+<div class="table-users">
+   <div class="header">Users</div>
+   
+   <table cellspacing="0">
+      <tr>
+         <th width="50">Name</th>
+         <th width="200">Email</th>
+         <th width="100">Phone</th>
+         <th width="230">Comments</th>
+      </tr>
+
+      <tr>
+         <td>John Doe</td>
+         <td>john.doe@foo.com</td>
+         <td>01 800 2000</td>
+         <td>Blanditiis, aliquid numquam iure.</td>
+      </tr>
+
+      <tr>
+         <td>Jane Smith</td>
+         <td>jane.smith@foo.com</td>
+         <td>01 800 2000</td>
+         <td> Culpa praesentium </td>
+      </tr>
+      
+      <tr>
+         <td>John Smith</td>
+         <td>john.smith@foo.com</td>
+         <td>01 800 2000</td>
+         <td>Aut voluptatum </td>
+      </tr>
+   </table>
+</div>
+</body>
+</html>

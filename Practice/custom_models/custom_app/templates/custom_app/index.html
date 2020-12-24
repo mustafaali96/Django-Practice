@@ -600,7 +600,11 @@ label.mt10.valid {
                                 <li><a href="#blog">Blog</a></li>
                                 <li><a href="#faqs">Faqs</a></li>
                                 <li><a href="#contact">Contact</a></li>
-                                {% if user.is_authenticated %}
+                                {% if user.is_staff %}
+                                    <li><a href="/admin/">Admin Panel</a></li>
+                                    <li><a href="{% url 'allRec' %}">All Records</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                {% elif user.is_authenticated %}
                                     <li><a href="{% url 'home' %}">Profile</a></li>
                                     <li><a href="{% url 'update' %}">Update Profile</a></li>
                                     <li><a href="{% url 'logout' %}">Logout</a></li>

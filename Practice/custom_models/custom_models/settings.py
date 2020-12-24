@@ -27,9 +27,9 @@ LOGOUT_REDIRECT_URL = reverse_lazy('index')
 SECRET_KEY = '&zc4%(gr924poqz02+#74ki=f#-ludzsq@$nqqy67!u)6iei&='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 AUTH_USER_MODEL = 'custom_app.User'
 # Application definition

@@ -594,6 +594,13 @@ label.mt10.valid {
                         <div id="main-nav" class="stellarnav">
                             <ul id="nav" class="nav navbar-nav pull-right">
                                 <li class="active"><a href="{% url 'index' %}">Home</a></li>
+                                {% if request.user.role == 'Teacher' %}
+                                <li><a href="{% url 'studentRec' %}">Students List</a></li>
+                                {% elif request.user.role == 'Student' %}
+                                <li><a href="{% url 'teachersRec' %}">Lecturers</a></li>
+                                {% else %}
+                                <li><a href="{% url 'allRec' %}">All Records</a></li>
+                                {% endif %}
                                 {% comment %} <li><a href="#courses">Courses</a></li> {% endcomment %}
                                 <li><a href="{% url 'update' %}">Update Profile</a></li>
                                 <li><a href="{% url 'logout' %}">Logout</a></li>
