@@ -11,6 +11,14 @@ class UserForm(forms.ModelForm):
         'first_name': forms.TextInput(attrs={'placeholder': 'first name'}),
         'last_name': forms.TextInput(attrs={'placeholder': 'last name'}),
         }
+        help_texts = {
+            'password': ('Use Strong Password.'),
+        }
+        error_messages = {
+            'username': {
+                'max_length': ("This username is already taken."),
+            },
+        }
         # username = forms.CharField(widget=forms.TextInput(attrs={'class':'special', 'autocomplete': 'off'}))
         
     def save(self):

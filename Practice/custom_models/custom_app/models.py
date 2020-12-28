@@ -14,7 +14,7 @@ class User(AbstractUser):
     subject = models.CharField(max_length=30, choices=subjects, 
                                help_text = ('Enter your Subject'))
     roles = Choices('Student', 'Teacher')
-    role = models.CharField(max_length=20, choices=roles)
+    role = models.CharField(max_length=20, choices=roles) 
     
     def __str__(self):
         return self.username

@@ -37,13 +37,9 @@ def login_view(request):
 @login_required(login_url=reverse_lazy("login"),)
 def home_view(request):
     # context = User.objects.values('role').distinct()
-    # print(context)
     # user_name = request.user.username
     # role = request.user.role
     # subject = request.user.subject
-    # print("user role is:", role)
-    # print("Subjects are: ", subject)
-    # print("User id is: ", request.user.id)
     if request.user.is_staff:
         return redirect("/admin/")
     else:
