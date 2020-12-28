@@ -27,7 +27,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy('index')
 SECRET_KEY = '&zc4%(gr924poqz02+#74ki=f#-ludzsq@$nqqy67!u)6iei&='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 

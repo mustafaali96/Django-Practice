@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
-from custom_app.forms import UserForm, recordCreate
+from custom_app.forms import UserForm, updateCreate
 from django.contrib.auth.hashers import make_password
 from .models import User
 from django.conf import settings
@@ -53,7 +53,7 @@ def home_view(request):
 def update_record(request):
     userInstance = User.objects.get(id=request.user.id)
     if request.method == 'POST':
-        record_form = recordCreate(instance=userInstance, 
+        record_form = updateCreate(instance=userInstance, 
                                     data=request.POST)
         if record_form.is_valid():
             record_form.save()
@@ -61,7 +61,7 @@ def update_record(request):
         return render(request, 'custom_app/update.html', 
                         {'upload_form':record_form})
         
-    record_form = recordCreate(instance=userInstance)
+    record_form = updateCreate(instance=userInstance)
     return render(request, 'custom_app/update.html', 
                     {'upload_form':record_form})
 

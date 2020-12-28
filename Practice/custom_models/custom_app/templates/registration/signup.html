@@ -129,36 +129,50 @@ margin-left: 4px;
 			</div>
 			<div class="card-body">
 				<form method="post" autocomplete="off">
-          		{% csrf_token %}
-				<div class="input-group form-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><i class="fas fa-user"></i></span>
+					{% csrf_token %}
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+							{% comment %} <input id='{{ form.username }}'> {% endcomment %}
+							{{ form.username }}
+							
+						</div>
 					</div>
-            		{{ form.username }}
-				</div>
-				<div class="input-group form-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><i class="fas fa-key"></i></span>
-						{{ form.password }}
+					<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								{{ form.first_name }}
+							</div>
+						</div>
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								{{ form.last_name }}
+							</div>
+						</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+							{{ form.password }}
+						</div>
 					</div>
-				</div>
-          		<div class="input-group form-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><i class="fas fa-chalkboard-teacher"></i></i></span>
-                		<select name="role" id={{form.role}}
-              			</select>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-chalkboard-teacher"></i></i></span>
+							<select name="role" id={{form.role}}
+							</select>
+						</div>
 					</div>
-				</div>
-         	 	<div class="input-group form-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><i class="fas fa-book"></i></span>
-                		<select name="subject" id={{form.subject}}
-                		</select>
-            		</div>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="signup" class="btn float-right login_btn">
-				</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-book"></i></span>
+							<select name="subject" id={{form.subject}}
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="signup" class="btn float-right login_btn">
+					</div>
 				</form>
 			</div>
 			<div class="card-footer">
