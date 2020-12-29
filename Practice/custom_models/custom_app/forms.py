@@ -4,12 +4,13 @@ from custom_app.models import User
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "username", "password","subject", "role", )
+        fields = ("first_name", "last_name", "username", "password","subject", "role", "user_image",)
         widgets = {
         'password': forms.PasswordInput(attrs={'placeholder': 'password', 'autocomplete': 'off'}),
         'username': forms.TextInput(attrs={'placeholder': 'username', 'autocomplete': 'off'}),
         'first_name': forms.TextInput(attrs={'placeholder': 'first name', 'autocomplete': 'off'}),
         'last_name': forms.TextInput(attrs={'placeholder': 'last name', 'autocomplete': 'off'}),
+        'user_image': forms.FileInput(attrs={'class': 'form-control-user', 'accept': 'image/*'}),
         }
         help_texts = {
             'password': ('Use Strong Password.'),
@@ -27,7 +28,7 @@ class UserForm(forms.ModelForm):
 class updateUser(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "username","subject", "role", "user_image")
+        fields = ("first_name", "last_name", "username","subject", "role", "user_image",)
         widgets = {
         'password': forms.PasswordInput(attrs={'placeholder': 'new password'}),
         'username': forms.TextInput(attrs={'placeholder': 'new username'}),

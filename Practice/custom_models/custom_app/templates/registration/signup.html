@@ -78,6 +78,18 @@ color: black;
 border:0 !important;
 }
 
+.input-group1-prepend input{
+width: 220px;
+color: white;
+border:0 !important;
+}
+
+.input-group2-prepend {
+width: 220px;
+color: white;
+border:0 !important;
+}
+
 input:focus{
 outline: 0 0 0 0  !important;
 box-shadow: 0 0 0 0 !important;
@@ -167,6 +179,15 @@ margin-left: 0px;
 							<span class="input-group-text"><i class="fas fa-book"></i></span>
 							<select name="subject" id={{form.subject}}
 							</select>
+						</div>
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group1-prepend">
+							<div class="input-group2-prepend">
+								Profile Picture
+								{{form.user_image}}
+								</div>
+							
 						</div>
 					</div>
 					<div class="form-group">

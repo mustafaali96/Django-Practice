@@ -15,7 +15,7 @@ def index_view(request):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = UserForm(request.POST,request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('login')
@@ -63,12 +63,13 @@ def update_record(request):
 @login_required(login_url=reverse_lazy("login"),)
 def record_list(request):
     record = User.objects.all()
+    # record = User.objects.filter(role= 'Student') | User.objects.filter( role= 'Teacher')
     if request.user.role == 'Teacher':
         record = User.objects.filter(role= 'Student', subject= request.user.subject)
     elif request.user.role == 'Student':
         record = User.objects.filter(role= 'Teacher', subject= request.user.subject)
     print("Your records are: ", record)
-    # print(request.user.user_image)
+    print(request.user.user_image)
     return render(request, 'custom_app/records.html',
                     {'record': record})
 
