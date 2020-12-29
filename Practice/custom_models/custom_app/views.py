@@ -3,8 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
-from custom_app.forms import UserForm, updateUser
+from custom_app.forms import UserForm, updateUser, addCourse
 from django.contrib.auth.hashers import make_password
+from django.contrib.admin.views.decorators import staff_member_required
 from custom_app.models import User
 from django.conf import settings
 
@@ -63,7 +64,6 @@ def update_record(request):
 @login_required(login_url=reverse_lazy("login"),)
 def record_list(request):
     record = User.objects.all()
-    # record = User.objects.filter(role= 'Student') | User.objects.filter( role= 'Teacher')
     if request.user.role == 'Teacher':
         record = User.objects.filter(role= 'Student', subject= request.user.subject)
     elif request.user.role == 'Student':
@@ -76,3 +76,17 @@ def record_list(request):
 @login_required(login_url=reverse_lazy("login"),)
 def studentsRec_view(request):
     return render(request, 'custom_app/studentRecord.html')
+
+@staff_member_required(login_url=reverse_lazy("login"),)
+def addCourseView(request):
+    if request.method == 'POST':
+        course_form = addCourse(request.POST)
+        if course_form.is_valid():
+            course_form.save()
+            return redirect('home')
+        else:
+            return render(request, 'custom_app/addCourse.html', 
+                            {'course_form': course_form})
+    else:
+        course_form = addCourse()
+    return render(request, 'custom_app/addCourse.html', {'course_form': course_form})

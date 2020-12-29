@@ -21,30 +21,12 @@ class User(AbstractUser):
 
 
 class Courses(models.Model):
-    courses = [
-    ('Engineering', (
-            ('Software Engineering', 'SE'),
-            ('Computer Engineering', 'CE'),
-            ('Electrical Engineering', 'EE'),
-        )
-    ),
-    ('Commerce', (
-            ('Bachelor of Business Administration', 'BBA'),
-            ('Chartered Accountancy', 'CA'),
-        )
-    ),
-    ('Medical', (
-            ('Neuroscience', 'NS'),
-            ('Bachelor of Medicine, Bachelor of Surgery', 'MBBS'),
-        )
-    ),
-    ]
-    course = models.CharField(max_length=100, choices=courses,
-                                unique=True)
-
-
+    name = models.CharField(max_length=100, unique=True)
+    description = models.CharField(max_length=200)
+    domain = models.CharField(max_length=100)
+    
     def __str__(self):
-        return self.course
+        return self.name
 
 
 

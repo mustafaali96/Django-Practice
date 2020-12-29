@@ -115,7 +115,7 @@ h2 small {
         <li class="table-row">
           {% comment %} <div class="col col-0img"> {% endcomment %}
           <div class="col col-0" >
-          <img src="{{field.user_image.url}}" alt="" height='50' width='50' /></div>
+          <img src="{% if field.user_image %}{{field.user_image.url}}{% endif %}" alt="" height='50' width='50' /></div>
           {% comment %} {{field.user_image}} {% endcomment %}
           <div class="col col-1" data-label={{field.username}}>{{field.username}}</div>
           <div class="col col-2" data-label={{ field.subject }}>{{ field.subject }}</div>
@@ -129,7 +129,7 @@ h2 small {
     {% for field in record %}
         <li class="table-row">
           <div class="col col-0" >
-          <img src="{{field.user_image.url}}" alt="static/user_imgs/download.png" height='50' width='50' /></div>
+          <img src="{% if field.user_image %}{{field.user_image.url}}{% else %}{% static 'user_imgs/download.png' %}{% endif %}" alt="" height='50' width='50' /></div>
           <div class="col col-1" data-label={{field.username}}>{{field.username}}</div>
           <div class="col col-2" data-label={{ field.subject }}>{{ field.subject }}</div>
           <div class="col col-3" data-label={{ field.role }}>{{ field.role }}</div>
