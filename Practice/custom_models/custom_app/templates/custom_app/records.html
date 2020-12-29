@@ -1,31 +1,4 @@
-{% comment %} {% block content %}
-    <center>
-    {% if request.user.role == 'Teacher' %}
-    <h1 class="display-3" >Students Records</h1>
-
-    {% elif request.user.role == 'Student' %}
-    <h1 class="display-3" >Teachers List</h1>
-
-    {% else %}
-    <h1 class="display-3" >All Records</h1>
-
-    {% endif %}
-    <form method='POST'>
-        <table class = 'w-50 table table-light' ">
-            {% for field in record %}
-            <tr>
-                <th>{{field.username}}</th>
-                <td>{{ field.role }}</td>
-                <td>{{ field.subject }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </form>
-    <a href= "{% url 'home' %}" class="btn"</a>
-  <button>Back</button></a>
-</center>
-{% endblock %} {% endcomment %}
-
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +6,10 @@
 </head>
 <style>
 body {
+  background-image: url("{% static 'assest/bg_img/bg_img-allrec.jpg' %}");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
   font-family: "lato", sans-serif;
 }
 
@@ -40,8 +17,8 @@ body {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 10px;
+  padding-right: 20px;
 }
 
 h2 {
@@ -54,11 +31,11 @@ h2 small {
 }
 
 .responsive-table li {
-  border-radius: 3px;
-  padding: 25px 30px;
+  border-radius: 5px;
+  padding: 15px 25px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 .responsive-table .table-header {
   background-color: #95A5A6;
@@ -70,8 +47,13 @@ h2 small {
   background-color: #ffffff;
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
 }
-.responsive-table .col-1 {
+
+.responsive-table .col-0 {
+  border-radius: 10px;
   flex-basis: 10%;
+}
+.responsive-table .col-1 {
+  flex-basis: 20%;
 }
 .responsive-table .col-2 {
   flex-basis: 40%;
@@ -99,7 +81,7 @@ h2 small {
   }
   .responsive-table .col:before {
     color: #6C7A89;
-    padding-right: 100px;
+    padding-right: 10px;
     content: attr(data-label);
     flex-basis: 50%;
     text-align: right;
@@ -121,6 +103,7 @@ h2 small {
   <ul class="responsive-table">
 
     <li class="table-header">
+      <div class="col col-0">Image</div>
       <div class="col col-1">Name</div>
       <div class="col col-2">Subject</div>
       <div class="col col-3">Role</div>
@@ -129,22 +112,28 @@ h2 small {
       <div class="col col-4">View Student</div>
     </li>
     {% for field in record %}
-    <li class="table-row">
-      <div class="col col-1" data-label={{field.username}}>{{field.username}}</div>
-      <div class="col col-2" data-label={{ field.subject }}>{{ field.subject }}</div>
-      <div class="col col-3" data-label={{ field.role }}>{{ field.role }}</div>
-      <div class="col col-4" data-label={{ field.role }}>Assign subject</div>
-    </li>
+        <li class="table-row">
+          {% comment %} <div class="col col-0img"> {% endcomment %}
+          <div class="col col-0" >
+          <img src="{{field.user_image.url}}" alt="" height='50' width='50' /></div>
+          {% comment %} {{field.user_image}} {% endcomment %}
+          <div class="col col-1" data-label={{field.username}}>{{field.username}}</div>
+          <div class="col col-2" data-label={{ field.subject }}>{{ field.subject }}</div>
+          <div class="col col-3" data-label={{ field.role }}>{{ field.role }}</div>
+          <div class="col col-4" data-label={{ field.id }}>Assign subject</div>
+        </li>
     {% endfor %}
 
     {% else %}
     </li>
     {% for field in record %}
-    <li class="table-row">
-      <div class="col col-1" data-label={{field.username}}>{{field.username}}</div>
-      <div class="col col-2" data-label={{ field.subject }}>{{ field.subject }}</div>
-      <div class="col col-3" data-label={{ field.role }}>{{ field.role }}</div>
-    </li>
+        <li class="table-row">
+          <div class="col col-0" >
+          <img src="{{field.user_image.url}}" alt="" height='50' width='50' /></div>
+          <div class="col col-1" data-label={{field.username}}>{{field.username}}</div>
+          <div class="col col-2" data-label={{ field.subject }}>{{ field.subject }}</div>
+          <div class="col col-3" data-label={{ field.role }}>{{ field.role }}</div>
+        </li>
     {% endfor %}
     {% endif %}
     

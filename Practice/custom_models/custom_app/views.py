@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
-from custom_app.forms import UserForm, updateCreate
+from custom_app.forms import UserForm, updateUser
 from django.contrib.auth.hashers import make_password
-from .models import User
+from custom_app.models import User
 from django.conf import settings
 
 # Create your views here.
@@ -47,17 +47,16 @@ def home_view(request):
 
 @login_required(login_url=reverse_lazy("login"),)
 def update_record(request):
-    userInstance = User.objects.get(id=request.user.id)
+    record_form = updateUser(instance=request.user)
     if request.method == 'POST':
-        record_form = updateCreate(instance=userInstance, 
-                                    data=request.POST)
+        record_form = updateUser(request.POST,request.FILES, instance=request.user)
         if record_form.is_valid():
             record_form.save()
-            return redirect('index')
+            return redirect('home')
         return render(request, 'custom_app/update.html', 
                         {'upload_form':record_form})
         
-    record_form = updateCreate(instance=userInstance)
+    record_form = updateUser(instance=request.user)
     return render(request, 'custom_app/update.html', 
                     {'upload_form':record_form})
 
@@ -68,7 +67,8 @@ def record_list(request):
         record = User.objects.filter(role= 'Student', subject= request.user.subject)
     elif request.user.role == 'Student':
         record = User.objects.filter(role= 'Teacher', subject= request.user.subject)
-    # print("Your records are: ", record)
+    print("Your records are: ", record)
+    # print(request.user.user_image)
     return render(request, 'custom_app/records.html',
                     {'record': record})
 

@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +23,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+background-image: url("{% static 'assest/bg_img/bg_img.jpg' %}");
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -36,7 +36,7 @@ align-content: center;
 }
 
 .card{
-height: 370px;
+height: 420px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
@@ -44,7 +44,7 @@ background-color: rgba(0,0,0,0.5) !important;
 }
 
 .social_icon span{
-font-size: 60px;
+font-size: 40px;
 margin-left: 10px;
 color: #FFC312;
 }
@@ -54,18 +54,18 @@ color: white;
 cursor: pointer;
 }
 
-.card-header h3{
+.card-header h4{
 color: white;
 }
 
 .social_icon{
 position: absolute;
-right: 20px;
-top: -45px;
+right: 10px;
+top: -30px;
 }
 
 .input-group-prepend span{
-width: 50px;
+width: 45px;
 background-color: #FFC312;
 color: black;
 border:0 !important;
@@ -75,6 +75,12 @@ border:0 !important;
 width: 220px;
 background-color: white;
 color: black;
+border:0 !important;
+}
+
+.input-group1-prepend input{
+width: 220px;
+color: white;
 border:0 !important;
 }
 
@@ -90,19 +96,19 @@ color: white;
 
 .remember input
 {
-width: 20px;
-height: 20px;
+width: 10px;
+height: 10px;
 margin-left: 15px;
 margin-right: 5px;
 }
 
-.login_btn{
+.update_btn{
 color: black;
 background-color: #FFC312;
 width: 100px;
 }
 
-.login_btn:hover{
+.update_btn:hover{
 color: black;
 background-color: white;
 }
@@ -112,7 +118,7 @@ color: white;
 }
 
 .links a{
-margin-left: 4px;
+margin-left: 0px;
 }
 </style>
 <body>
@@ -120,7 +126,7 @@ margin-left: 4px;
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
 			<div class="card-header">
-				<h3>Sign Up</h3>
+				<h4>Update Profile</h4>
 				<div class="d-flex justify-content-end social_icon">
 					<span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>
@@ -128,39 +134,56 @@ margin-left: 4px;
 				</div>
 			</div>
 			<div class="card-body">
-				<form method="post" autocomplete="off">
-                {% csrf_token %}
-				<div class="input-group form-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><i class="fas fa-user"></i></span>
-            			{{ upload_form.username }}	
+				<form method="post" enctype="multipart/form-data" autocomplete="off">
+					{% csrf_token %}
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+							{{ upload_form.username }}	
+						</div>
 					</div>
-				</div>
-          		<div class="input-group form-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><i class="fas fa-chalkboard-teacher"></i></i></span>
-						<select name="role" id={{upload_form.role}}
-						</select>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+							{{ upload_form.first_name }}
+						</div>
 					</div>
-				</div>
-          		<div class="input-group form-group">
-					<div class="input-group-prepend">
-					<span class="input-group-text"><i class="fas fa-book"></i></span>
-                	<select name="subject" id={{upload_form.subject}}
-                	</select>
-            		</div>
-				</div>
-				<div class="form-group">
-				<input type="submit" value="update" class="btn float-right login_btn">
-				</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+							{{ upload_form.last_name }}
+						</div>
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-chalkboard-teacher"></i></i></span>
+							<select name="role" id={{upload_form.role}}
+							</select>
+						</div>
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-book"></i></span>
+							<select name="subject" id={{upload_form.subject}}
+							</select>
+						</div>
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group1-prepend">
+							{% comment %} <input type="file" id= {% endcomment %}
+							{{upload_form.user_image}}
+						</div>
+					</div>
+					<input type="submit" value="update" class="btn float-right update_btn">	
 				</form>
 			</div>
             <div class="card-footer">
 				<div class="d-flex justify-content-center links">
-				<a href="{% url 'home' %}">Profile</a>
+					<a href="{% url 'home' %}">Profile</a>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
