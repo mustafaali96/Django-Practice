@@ -118,9 +118,11 @@ h2 small {
           <img src="{% if field.user_image %}{{field.user_image.url}}{% endif %}" alt="" height='50' width='50' /></div>
           {% comment %} {{field.user_image}} {% endcomment %}
           <div class="col col-1" data-label={{field.username}}>{{field.username}}</div>
-          <div class="col col-2" data-label={{ field.subject }}>{{ field.subject }}</div>
+          
+          <div class="col col-2" data-label={{ field.subject.all }}>{% for subject in field.subject.all %}{{ subject }},{% endfor %}</div>
+          
           <div class="col col-3" data-label={{ field.role }}>{{ field.role }}</div>
-          <div class="col col-4" data-label={{ field.id }}>Assign subject</div>
+          <div class="col col-4" data-label={{ field.id }}><a href="{{ field.detail_dis }}">Assign subject</a></div> 
         </li>
     {% endfor %}
 
@@ -131,7 +133,7 @@ h2 small {
           <div class="col col-0" >
           <img src="{% if field.user_image %}{{field.user_image.url}}{% else %}{% static 'user_imgs/download.png' %}{% endif %}" alt="" height='50' width='50' /></div>
           <div class="col col-1" data-label={{field.username}}>{{field.username}}</div>
-          <div class="col col-2" data-label={{ field.subject }}>{{ field.subject }}</div>
+          <div class="col col-2" data-label={{ field.subject.all }}>{% for subject in field.subject.all %}{{ subject }},{% endfor %}</div>
           <div class="col col-3" data-label={{ field.role }}>{{ field.role }}</div>
         </li>
     {% endfor %}

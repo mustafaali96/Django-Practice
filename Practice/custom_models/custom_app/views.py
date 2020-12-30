@@ -16,11 +16,32 @@ def index_view(request):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserForm(request.POST,request.FILES, instance=request.user)
+        form = UserForm(request.POST,request.FILES)
         if form.is_valid():
+            # subjectQuery = form.cleaned_data.get('subject')
+            # f_name = form.cleaned_data['first_name']
+            # l_name = form.cleaned_data['last_name']
+            # u_name = form.cleaned_data['username']
+            # make_password(form.cleaned_data['password'])
+            # rol = form.cleaned_data['role']
+            # img = form.cleaned_data['user_image']
+            # objects = User.objects.create(first_name=f_name, last_name=l_name,
+            #  username=u_name, password=passwrd, role=rol, user_image=img )
+            # for items in subjectQuery.iterator():
+            #     print(items)
+            #     objects.subject.add(items)
+            #     # User.subject.add(items)
+            # print("User Form is ", form)
+            # print("type of form is: ", allQueryset)
             form.save()
+            try:
+                form.save_m2m()
+            except Exception:
+                pass
+
             return redirect('login')
         else:
+            print(form.errors)
             return render(request, 'registration/signup.html', 
                             {'form': form})
     else:
@@ -64,18 +85,26 @@ def update_record(request):
 @login_required(login_url=reverse_lazy("login"),)
 def record_list(request):
     record = User.objects.all()
-    if request.user.role == 'Teacher':
-        record = User.objects.filter(role= 'Student', subject= request.user.subject)
-    elif request.user.role == 'Student':
-        record = User.objects.filter(role= 'Teacher', subject= request.user.subject)
-    print("Your records are: ", record)
-    print(request.user.user_image)
-    return render(request, 'custom_app/records.html',
-                    {'record': record})
+    for sub in request.user.subject.all():
+        print("your subjects" , sub)
+        print(User.objects.filter(subject=sub))
+        if request.user.role == 'Teacher':
+            record = User.objects.filter(role= 'Student', subject= sub)
+        elif request.user.role == 'Student':
+            record = User.objects.filter(role= 'Teacher', subject= sub)
+        print("Your records are: ", record)
+        # for i in record:
+        #     print(i.subject.all())
+        # print(request.user.user_image)
+        return render(request, 'custom_app/records.html',
+                        {'record': record})
 
 @login_required(login_url=reverse_lazy("login"),)
-def studentsRec_view(request):
-    return render(request, 'custom_app/studentRecord.html')
+def studentsRec_view(request, user_id):
+    details = User.objects.get(id=user_id)
+    # print(details)
+    return render(request, 'custom_app/studentRecord.html',
+                            {'details': details})
 
 @staff_member_required(login_url=reverse_lazy("login"),)
 def addCourseView(request):

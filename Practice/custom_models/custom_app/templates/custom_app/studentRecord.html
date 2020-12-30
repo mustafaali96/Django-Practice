@@ -1,0 +1,23 @@
+{% comment %} {% block content %}
+    <center>
+    <h1 class="display-3" style="color:#0066cc;">Student Data</h1>
+    <form method='POST'>
+        {% csrf_token %}
+        <table class = 'w-50 table table-light' style="border-radius:10px;background-color:#FFFF99;">
+            {% for field in upload_form %}
+            <tr>
+                <th>{{field.label}}</th>
+                <td>{{ field }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit" class="btn btn-lg btn-warning">Update</button>
+    </form>
+    <a href= "{% url 'home' %}" class="btn"</a>
+  <button>Back</button></a>
+</center>
+{% endblock %} {% endcomment %}
+<img src="{% if details.user_image %}{{details.user_image.url}}{% endif %}" alt="" height='50' width='50' /></div>
+{{details.username}}
+{{ details.role }}
+{% for subject in details.subject.all %}{{ subject }},{% endfor %}

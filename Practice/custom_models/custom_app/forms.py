@@ -11,6 +11,7 @@ class UserForm(forms.ModelForm):
         'first_name': forms.TextInput(attrs={'placeholder': 'first name', 'autocomplete': 'off'}),
         'last_name': forms.TextInput(attrs={'placeholder': 'last name', 'autocomplete': 'off'}),
         'user_image': forms.FileInput(attrs={'class': 'form-control-user', 'accept': 'image/*'}),
+        'subject' : forms.CheckboxSelectMultiple(),
         }
         help_texts = {
             'password': ('Use Strong Password.'),
@@ -22,8 +23,8 @@ class UserForm(forms.ModelForm):
         }
         # username = forms.CharField(widget=forms.TextInput(attrs={'class':'special', 'autocomplete': 'off'}))
         
-    def save(self):
-        return User.objects.create_user(**self.cleaned_data)
+    # def save(self):
+    #     return User.objects.create_user(**self.cleaned_data)
 
 class updateUser(forms.ModelForm):
     class Meta:
@@ -42,7 +43,13 @@ class addCourse(forms.ModelForm):
         model = Courses 
         fields = ("name", "description", "domain",)
         widgets = {
-        'name': forms.TextInput(attrs={'placeholder': 'new course'}),
-        'description': forms.TextInput(attrs={'placeholder': 'new course'}),
-        'domain': forms.TextInput(attrs={'placeholder': 'new course'}),
+        'name': forms.TextInput(attrs={'placeholder': 'new course name'}),
+        'description': forms.TextInput(attrs={'placeholder': 'new course description'}),
+        'domain': forms.TextInput(attrs={'placeholder': 'new course domain'}),
         }
+
+class AssignCourse(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("subject",)
+        

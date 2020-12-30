@@ -15,5 +15,5 @@ urlpatterns = [
     path('teachers/', views.record_list, name= "teachersRec"),
     path('records/', views.record_list, name= "allRec"),
     path('addCourse/', views.addCourseView, name= "addcourse"),
-    # path('Student<id>/', views.studentsRec_view, name= "student_id_rec"),
+    path('StudentRec/<user_id>/', views.studentsRec_view, name= "student_id_rec"),
 ]
