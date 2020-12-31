@@ -178,8 +178,7 @@ margin-left: 0px;
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-book"></i></span>
 						 	<div class="input-group2-prepend">
-								<select {{form.subject}}
-								</select>
+								{% for sub in form.subject %} {{sub}} {% endfor %}
 							</div>
 						</div>
 					 </div>	

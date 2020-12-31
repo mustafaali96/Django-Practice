@@ -21,7 +21,6 @@ class UserForm(forms.ModelForm):
                 'max_length': ("This username is already taken."),
             },
         }
-        # username = forms.CharField(widget=forms.TextInput(attrs={'class':'special', 'autocomplete': 'off'}))
         
     # def save(self):
     #     return User.objects.create_user(**self.cleaned_data)
@@ -36,6 +35,7 @@ class updateUser(forms.ModelForm):
         'first_name': forms.TextInput(attrs={'placeholder': 'first name'}),
         'last_name': forms.TextInput(attrs={'placeholder': 'last name'}),
         'user_image': forms.FileInput(attrs={'class': 'form-control-user', 'accept': 'image/*'}), 
+        'subject' : forms.CheckboxSelectMultiple(),
         }
 
 class addCourse(forms.ModelForm):

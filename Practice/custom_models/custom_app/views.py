@@ -33,9 +33,17 @@ def signup_view(request):
             #     # User.subject.add(items)
             # print("User Form is ", form)
             # print("type of form is: ", allQueryset)
-            form.save()
+            # print("Your Form Password: ", form.data['password'])
+            # password = make_password(form.cleaned_data['password'])
+            # form.data['password'] = make_password(form.data['password'])
+            # print("your clean pass ", password)
+            # print(password1)
+            user_form = form.save(commit=False)
+            # print("user password: ", user_form.password)
+            user_form.password = make_password(user_form.password)
+            user_form.save()
             try:
-                form.save_m2m()
+                user_form.save_m2m()
             except Exception:
                 pass
 
@@ -69,11 +77,14 @@ def home_view(request):
 
 @login_required(login_url=reverse_lazy("login"),)
 def update_record(request):
-    record_form = updateUser(instance=request.user)
     if request.method == 'POST':
         record_form = updateUser(request.POST,request.FILES, instance=request.user)
         if record_form.is_valid():
             record_form.save()
+            try:
+                record_form.save_m2m()
+            except Exception:
+                pass
             return redirect('home')
         return render(request, 'custom_app/update.html', 
                         {'upload_form':record_form})
