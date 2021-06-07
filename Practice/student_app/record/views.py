@@ -32,7 +32,9 @@ def update_record(request, record_id):
         if record_form.is_valid():
             record_form.save()
             return redirect('index')
+        else:
+            return HttpResponse("Your from is not valid")
     else:
-        return render(request, 'record/upload_form.html', {'upload_form':record_form})
+        return redirect('index')
         
     
